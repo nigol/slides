@@ -1,0 +1,268 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Java EE</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+	<section>
+	  <h1>Java EE</h1>
+	  <h3>Zač je toho loket</h3>
+	  <p style="font-size: small">
+	    Martin Polák
+	  </p>
+	  <a href="https://github.com/nigol/slides">github.com/nigol/slides</a>
+	  <a href="http://slides.nigol.cz">slides.nigol.cz</a>
+	</section>
+
+	<section>
+	  <h2>Co je Java EE?</h2>
+	  <p>
+	    Framework pro vývoj aplikací + aplikační server.
+	  </p>
+	  <p>
+	    Obsahuje zejména:
+	  </p>
+	  <ul>
+	    <li>Webové technologie (Servlet, EL, JSP, JSF, ...)</li>
+	    
+	    <li>Java API pro rozhraní SOAP, REST (JAX-WS, JAX-RS)</li>
+	    
+	    <li>Enterprise JavaBeans (EJB)</li>
+	    
+	    <li>Java Persistence API (JPA)</li>
+	    
+	    <li>Contexts and Dependency Injection (CDI)</li>
+	  </ul>
+	</section>
+	
+	<section>
+	  <h2>Stručná historie Javy EE</h2>
+	  <h3>...bez nároku na úplnost</h3>
+	  
+	  <p>...včetně zmateného(?) číslování verzí.
+	  <ul>
+	    <li>1996 První verze Javy JDK 1.0</li>
+	    
+	    <li>1999 J2EE 1.2</li>
+	    
+	    <li>...</li>
+	    
+	    <li>2006 Java EE 5</li>
+	    
+	    <li>...</li>
+	    
+	    <li>2017 Java EE 8</li>
+	  </ul>
+	</section>
+
+	<section>
+	  <section>
+	    <h2>Hlavní benefit Javy EE? (IMHO)</h2>
+	    <p>
+	      <u>Správa životního cyklu komponent a DI...</u>
+	    </p>
+	    <table style="font-size: 80%">
+	      <tr><td rowspan="8" style="background-color: red">Application</td><td rowspan="4" style="background-color: green">Session</td><td rowspan="2" style="background-color: blue">View</td><td>Request</td></tr>
+	      <tr><td>Request</td></tr>
+	      <tr><td rowspan="2" style="background-color: blue">View</td><td>Request</td></tr>
+	      <tr><td>Request</td></tr>
+	      <tr><td rowspan="4"style="background-color: green">Session</td><td rowspan="2" style="background-color: blue">View</td><td>Request</td></tr>
+	      <tr><td>Request</td></tr>
+	      <tr><td rowspan="2"style="background-color: blue">View</td><td>Request</td></tr>
+	      <tr><td>Request</td></tr>
+	    </table>
+	  </section>
+
+	  <section>
+	    <p>
+	      <u>...a stabilita API, zpětná kompatibilita.</u>
+	    </p>
+	  </section>
+	</section>
+
+	<section>
+	  <section>
+	    <h2>Technologie JEE</h2>
+	    <h3>Contexts and Dependency Injection (CDI)</h3>
+	    <p>
+	      Udržuje instance komponent, hlídá rozsah platnosti a poskytuje platné instance.
+	    </p>
+
+	    <pre>
+	      <code>
+		@RequestScoped
+		public class ItemService
+		...
+		@Inject
+		private ItemService itemService;
+	      </code>
+	    </pre>
+	  </section>
+
+	  <section>
+	    <p>
+	      Umožňuje snadno implementovat některé návrhové vzory (Interceptor, Observer, ...).
+	    </p>
+	  </section>
+	</section>
+	
+	<section>
+	  <h2>Technologie JEE</h2>
+	  <h3>Java Persistence API (JPA)</h3>
+	  <p>
+	    Obvykle zabezpečuje mapování (ORM) z relační reprezentace dat na objektovou reprezentaci a opačně + práci s databází.
+	  </p>
+	  <ul>
+	    <li>Entity</li>
+	    
+	    <li>Vazby (1:1, 1:n, m:n, ...)</li>
+	    
+	    <li>Dotazy (JPQL)</li>
+	  </ul>
+	</section>
+
+	<section>
+	  <h2>Technologie JEE</h2>
+	  <h3>Enterprise JavaBeans (EJB)</h3>
+	  <p>
+	    Komponenty, které spravuje EJB kontejner s vlastním životním cyklem.
+	  </p>
+	  <ul>
+	    <li>Session beans (Stateful, Stateless, Singleton)</li>
+	    
+	    <li>Message beans (asynchronní)</li>
+	  </ul>
+	  <p>
+	    Interoperabilita s CDI.
+	  </p>
+	</section>
+
+	<section>
+	  <section>
+	    <h2>Technologie JEE</h2>
+	    <h3>Webové technologie (Servlet, EL, JSP, JSF, ...)</h3>
+	    <p>
+	      Umožňují vyvíjet webové uživatelské rozhraní. 
+	    </p>
+	    <ul>
+	      <li>Servlet - nízkoúrovňové rozhraní (přímo kód)</li>
+	      
+	      <li>JSP (Java Server Pages) - základní šablonovací systém</li>
+	      
+	      <li>JSF (Java Server Faces) - komponentově orientovaný šablonovací systém</li>
+	    </ul>
+	  </section>
+
+	  <section>
+	    <ul>
+	      <li>EL (Expression Language) - propojuje šablonu s kódem v pozadí - kontrolerem</li>
+	    </ul>
+
+	    <p>
+	      Ukázka JSF:
+	    </p>
+	    <pre>
+	      <code>
+		<h:link value="Link" outcome="/clanek.xhtml">
+		  <f:param name="id" value="#{indexBean.id}">
+		  </f:param>
+		</h:link>
+	      </code>
+	    </pre>
+	  </section>
+	</section>
+	
+	<section>
+	  <section>
+	    <h2>Technologie JEE</h2>
+	    <h3>Java API pro rozhraní SOAP, REST (JAX-WS, JAX-RS)</h3>
+	    <p>
+	      Usnadňuje vývoj rozhraní pro komunikaci aplikací přes SOAP nebo REST rozhraní.
+	    </p>
+	    <p>
+	      Redukuje množství kódu (a tím i chyb).
+	    </p>
+	  </section>
+	  <section>
+	    <pre>
+	      <code>
+		@Path("/item")
+		@Produces({MediaType.APPLICATION_JSON})
+		@Consumes({MediaType.APPLICATION_JSON})
+		@Model
+		public class ItemApi {
+		...
+		@GET
+		@Path("/all")
+		public Response items() {
+		...
+	      </code>
+	    </pre>
+	  </section>
+	</section>
+
+	<section>
+	  <h2>Aplikační servery</h2>
+	  <h3>Bez toho to nepůjde...</h3>
+	  <table>
+	    <tr><th>Volně dostupné</th><th>Komerční</th></tr>
+	    <tr><td>TomEE</td><td>WebSphere</td></tr>
+	    <tr><td>Glassfish</td><td>WebLogic</td></tr>
+	    <tr><td>OpenLiberty</td><td>SAP NetWeaver AS</td></tr>
+	  </table>
+	  <p>
+	    ...a další.
+	  </p>
+	</section>
+
+	<section>
+	  <h2>Budoucnost?</h2>
+	  <p>
+	    Další vývoj platformy - Jakarta EE (2018, pod křídly Eclipse Foundation).
+	  </p>
+	</section>
+
+	<section>
+	  <h2>Díky za pozornost!</h2>
+	</section>
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info about config & dependencies:
+      // - https://github.com/hakimel/reveal.js#configuration
+      // - https://github.com/hakimel/reveal.js#dependencies
+      Reveal.initialize({
+	  dependencies: [
+	      { src: 'plugin/markdown/marked.js' },
+	      { src: 'plugin/markdown/markdown.js' },
+	      { src: 'plugin/notes/notes.js', async: true },
+	      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+	  ]
+      });
+    </script>
+  </body>
+</html>
