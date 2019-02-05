@@ -1,0 +1,328 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Hrátky s Javascriptem</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+	<section>
+	  <h1>Hrátky s Javascriptem</h1>
+	  <h3>Funkce vyšších řádů</h3>
+	  <p style="font-size: small">
+	    Martin Polák
+	  </p>
+	  <p>
+	    <a href="https://github.com/nigol/slides">github.com/nigol/slides</a>
+	  </p>
+	  <p>
+	    <a href="http://slides.nigol.cz">slides.nigol.cz</a>
+	  </p>
+	</section>
+
+	<section>
+	  <section>
+	    <h2>Malý kvíz ;)</h2>
+	    <p>
+	      Co bude v proměnné 'r' po vyhodnocení?
+	    </p>
+	    <pre>
+	      <code>
+function fun(a) {
+  return function(b) {
+    return a + b;
+  }
+}
+
+var r = fun(1);
+	      </code>
+	    </pre>
+	    <p class="fragment">
+	      Správně, <em>r = function(b) {...</em>
+	    </p>
+	  </section>
+	  <section>
+	    <h2>Malý kvíz ;)</h2>
+	    <p>
+	      Jaký je rozdíl mezi:
+	    </p>
+	    <table style="width: 100%">
+	      <tr>
+		<td>
+		  <pre>
+		    <code>
+function fun(a, b) {
+  return a + b;
+}
+		    </code>
+		  </pre>
+		</td>
+		<td>
+		</td>
+		<td>
+		  <pre>
+		    <code>
+var fun = function(a, b) {
+  return a + b;
+}
+		    </code>
+		  </pre>
+		</td>
+	      </tr>
+	    </table>
+	    <p class="fragment">
+	      Správně, žádný.</em>
+	    </p>
+	  </section>
+	</section>
+	
+	<section>
+	  <section>
+	    <h2>Funkce vyšších řádů?</h2>
+	    <p>
+	    Funkce jsou rovnocenným datovým typem. Můžeme je ukládat do proměnných, předávat jako parametr jiné funkci nebo vracet jako výsledek funkce.
+	  </p>
+	  </section>
+	  <section>
+	    <h3>K čemu je to dobré?</h3>
+	    <ul>
+	      <li class="fragment">Přináší další možnost abstrakce.</li>
+	      <li class="fragment">Umožňuje znovupoužitelnost kódu i bez "klasických" OOP technik.</li>
+	      <li class="fragment">Můžeme do jazyka přidat nové konstrukce (např. OOP), aniž bychom museli měnit překladač jazyka.</li>
+	      <li class="fragment">Je to zábava :).</li>
+	      <li class="fragment">...</li>
+	    </ul>
+	  </section>
+	</section>
+
+	<section>
+	  <h2>Historie</h2>
+	  <ul>
+	    <li>
+	      Alonzo Church (1903 - 1995), <a href="https://cs.wikipedia.org/wiki/Lambda_kalkul">Lambda kalkul</a><br>
+	      <center>
+		<i>&lambda; x. x</i><br>
+		<img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a6/Alonzo_Church.jpg/220px-Alonzo_Church.jpg" style="width: 100px">
+	      </center>
+	    </li>
+	    <li>
+	      John McCarthy (1927 - 2011), <a href="https://cs.wikipedia.org/wiki/Lisp">prog. jazyk Lisp</a><br>
+	      <center>
+		<i>(lambda (x) x)</i><br>
+		<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/John_McCarthy_Stanford.jpg/225px-John_McCarthy_Stanford.jpg" style="width: 150px">
+	      </center>
+	    </li>
+	  </ul>
+	</section>
+
+	<section>
+	  <section>
+	    <h2>Trocha teorie<br>(nikoho nezabije)</h2>
+	    <h3>Lexikální rozsah platnosti</h3>
+	    <pre>
+	      <code>
+	      function fun(a) {
+	        return function(b) {
+	          return a + b;
+	        }
+	      }
+	      </code>
+	    </pre>
+	    <div style="width: 50%; height: 100px; background-color: green; margin-left: auto; margin-right: auto">
+	      <div style="font-size: small; margin-top: -20px">
+		Prostředí fun(a)<br>
+		<em>Proměnné: a</em>
+	      </div>
+	      <div style="width: 70%; height: 50px; background-color: red; margin-left: auto; margin-right: auto">
+		<div style="font-size: small">
+		  Prostředí function(b)<br>
+		  <em>Proměnné: b</em>
+		</div>
+	      </div>
+	    </div>
+	  </section>
+
+	  <section>
+	    <h3>Volné a vázané proměnné</h3>
+	    <pre>
+	      <code>
+	      function fun(a) {
+	        return function(b) {
+	          return a + b;
+	        }
+	      }
+	      </code>
+	    </pre>
+	    <ol>
+	      <li>Ve funkci <em>fun(a)</em> je pouze vázaná proměnná <em>a</em>.
+	      <li>Ve funkci <em>function(b)</em> je <em>b</em> vázaná proměnná, <em>a</em> je volná.
+	      </li>
+	    </ol>
+	  </section>
+	  <section>
+	    <h3>Volné a vázané proměnné</h3>
+	    <div style="width: 50%; height: 100px; background-color: green; margin-left: auto; margin-right: auto">
+	      <div style="font-size: small; margin-top: -20px">
+		Prostředí fun(a)<br>
+		<em>Proměnné: a</em>
+	      </div>
+	      <div style="width: 70%; height: 50px; background-color: red; margin-left: auto; margin-right: auto">
+		<div style="font-size: small">
+		  Prostředí function(b)<br>
+		  <em>Proměnné: b</em><br>
+		  <b>a + b;</b>
+		</div>
+	      </div>
+	    </div>
+	    <u>Vyhodnocení proměnných</u>
+	    <ol>
+	      <li class="fragment">Pokud je nalezena proměnná v aktuálním prostředí, použije se její hodnota.</li>
+	      <li class="fragment">Jinak se hledá v lexikálně nadřazeném prostředí. Pokud je nalezena, použije se její hodnota.</li>
+	      <li class="fragment">Pokud není proměnná nalezena ani v nadřazených prostředích &rarr; chyba.</li>
+	    </ol>
+	  </section>
+	  <section>
+	    <h3>Volné a vázané proměnné</h3>
+	    <u>Důsledky</u>
+	    <ul>
+	      <li>Definice proměnných může být překryta v podřízených prostředích (pozor).</li>
+	      <li>Snadné skládání funkcí.</li>
+	      <li>Lze provádět statickou analýzu kódu s ohledem na potenciálně problémový obsah proměnných.</li>
+	      <li>...</li>
+	    </ul>
+	  </section>
+	</section>
+
+	<section>
+	  <section>
+	    <h2>Trocha praxe<br>(už vůbec ne)</h2>
+	    <u>Skládání funkcí (<a href="https://en.wikipedia.org/wiki/Currying">currying</a>)</u>
+	    <p>
+	      Každá funkce s 1 a více parametry se dá přepsat jako složení funkcí s 1 parametrem.
+	    </p>
+	    <table style="width: 100%">
+	      <tr>
+		<td>
+		  <pre>
+		    <code>
+function fun(a, b) {
+  return a + b;
+}
+		    </code>
+		  </pre>
+		</td>
+		<td>
+		</td>
+		<td>
+		  <pre>
+		    <code>
+function fun(a) {
+  return function(b) {
+    return a + b;
+  }
+}
+		    </code>
+		  </pre>
+		</td>
+	      </tr>
+	    </table>
+	  </section>
+
+	  <section>
+	    <u>Znovupoužitelnost kódu</u>
+	    <pre>
+	      <code>
+function calcBuilder(fn) {
+  return function(a, b) {
+    return fn(a, b);
+  }
+}
+
+var add = calcBuilder(function(a, b) {
+  return a + b;
+});
+
+var mul = calcBuilder(function(a, b) {
+  return a * b;
+});
+	      </code>
+	    </pre>
+ 	  </section>
+	  <section>
+	    <u>Návrhové vzory: Interceptor</u>
+	    <pre>
+	      <code>
+function funkce() {
+  console.log("Logika funkce.");
+}
+
+function interc(fn) {
+  return function() {
+    console.log("Start");
+    fn();
+    console.log("Stop");
+  }
+}
+
+var intercepted = interc(funkce);
+	      </code>
+	    </pre>
+	  </section>
+	  <section>
+	    <u>Asynchronní kód</u>
+	    <pre>
+	      <code>
+fetch("https://www.hella.com")
+  .then(function(re) {
+    return re.text();
+  })		
+  .then(function(dt) {
+    console.log(dt.substring(0, 100));
+  });		
+	      </code>
+	    </pre>
+	  </section>
+	</section>
+	
+	<section>
+	  <h2>Díky za pozornost!</h2>
+	</section>
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info about config & dependencies:
+      // - https://github.com/hakimel/reveal.js#configuration
+      // - https://github.com/hakimel/reveal.js#dependencies
+      Reveal.initialize({
+	  dependencies: [
+	      { src: 'plugin/markdown/marked.js' },
+	      { src: 'plugin/markdown/markdown.js' },
+	      { src: 'plugin/notes/notes.js', async: true },
+	      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+	  ]
+      });
+    </script>
+  </body>
+</html>
