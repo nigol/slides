@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+                <title>AWS</title>
+
+                <link rel="stylesheet" href="css/reveal.css">
+                    <link rel="stylesheet" href="css/theme/black.css">
+
+                        <!-- Theme used for syntax highlighting of code -->
+                        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+                            <!-- Printing and PDF exports -->
+                            <script>
+                                var link = document.createElement( 'link' );
+                                link.rel = 'stylesheet';
+                                link.type = 'text/css';
+                                link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+                                document.getElementsByTagName( 'head' )[0].appendChild( link );
+                            </script>
+                        </head>
+                        <body>
+                            <div class="reveal">
+                                <div class="slides">
+                                    <section>
+                                        <h1>Amazon Web Services (AWS)</h1>
+                                        <h3>Jak to chodí u Amazonů</h3>
+                                        <p style="font-size: small">
+                                            Martin Polák
+                                        </p>
+                                        <p>
+                                            <a href="https://github.com/nigol/slides">github.com/nigol/slides</a>
+                                        </p>
+                                        <p>
+                                            <a href="http://slides.nigol.cz">slides.nigol.cz</a>
+                                        </p>
+                                    </section>
+
+                                    <section>
+                                        <section>
+                                            <h2>Představení AWS</h2>
+                                            <p>
+                                                Cloudové aplikační prostředí.
+                                            </p>
+                                            <ul>
+                                                <li class="fragment">Výpočetní prostředky</li>
+                                                <li class="fragment">Úložiště</li>
+                                                <li class="fragment">Databáze</li>
+                                                <li class="fragment">Nástroje pro vývojáře</li>
+                                                <li class="fragment">...</li>
+                                            </ul>
+                                            <p class="fragment">...PROSTĚ...</p>
+                                        </section>
+                                        <section>
+                                            <img src="aws1.png"></img>
+                                    </section>
+                                </section>
+
+                                <section>
+                                    <section>
+                                        <h2>Jak šel čas...</h2>
+                                        <ul>
+                                            <li>2002 Amazon.com Web Service <br><i>SOAP rozhraní pro Amazon katalog</i></li>
+                                            <li>Březen 2006 - veřejný start AWS<br>
+                                                <i>Služby Simple Storage Service (S3), Elastic Compute Cloud (EC2) a Simple Queue Service (SQS)</i></li>
+                                            <li>...</li>
+                                            <li>2018 Největší public cloud<br><i>Příjmy za rok 2018 - více než 25 mld. $</i></li>
+                                        </ul>
+                                        <p style="font-size: small">
+                                           Čísla se u různých zdrojů mírně liší. 
+                                        </p>
+                                    </section>
+                                    <section>
+                                        <h2>...dnes</h2>
+                                        <ul>
+                                            <li>Více než 90 služeb<br>
+                                                <i>Například i pro vývoj her, AR / VR nebo dokonce ovládaní družic</i></li>
+                                            <li>21 datacenter po celém světě<br>
+                                                <i>S miliony fyzických serverů</i></li>
+                                            <li>Vývoj vlastního HW<br>
+                                                <i>Servery s menší spotřebou, masivní disková pole (11 PB), routery (128 portů, 3.2 Tbit propustnost)</i></li>
+                                        </ul>
+                                    </section>
+                                </section>
+
+                                <section>
+                                    <section>
+                                        <h2>Vybrané služby</h2>
+                                    </section>
+                                    <section>
+                                        <h2>Amazon EC2</h2>
+                                        <p>Virtuální servery s Linuxem nebo Windows.</p>
+                                        <p>Velký výběr HW konfigurací (vCPU od 1 do 128 jader, paměť od 0,5 GB po 4 TB).</p>
+                                        <p>Více možností platby (za hodinu, rok, několik let).</p>
+                                        <p><a href="https://docs.aws.amazon.com/ec2/?id=docs_gateway">Amazon EC2</a></p>
+                                    </section>
+                                    <section>
+                                        <h2>AWS Lambda</h2>
+                                        <p>Umožňuje spouštět kód, aniž byste museli řešit servery a věci okolo.</p>
+                                        <p>Platíte pouze za čas, kdy kód běží.</p>
+                                        <p>Může reagovat na události (HTTP request, upload souboru, zpráva,...).</p>
+                                        <p><a href="https://docs.aws.amazon.com/lambda/index.html">AWS Lambda</a></p>
+                                    </section>
+                                    <section>
+                                        <h2>Amazon S3 (Simple Storage Service)</h2>
+                                        <p>Úložiště dat, (prakticky) neomezená kapacita, jeden objekt 5TB.</p>
+                                        <p>Různé způsoby uložení dat (Glacier,...).</p>
+                                        <p>Lze použít pro hosting statických dat.</p>
+                                        <p>Query in Place, Events,...</p>
+                                        <p><a href="https://docs.aws.amazon.com/s3/?id=docs_gateway">Amazon S3</a></p>
+                                    </section>
+                                    <section>
+                                        <h2>...je jich opravdu hodně...</h2>
+                                        <p>databáze (Aurora, DynamoDB, RDS,...)</p>
+                                        <p>autentizace, autorizace (IAM, Cognito,...)</p>
+                                        <p>vývoj her (Lumberyard,...)</p>
+                                        <p>machine learning, IoT, robotika</p>
+                                        <p>...</p>
+                                    </section>
+                                </section>
+
+                                <section>
+                                    <section>
+                                        <h2>Teď přijde kouzelník a...</h2>
+                                        <h3>...něco předvede :)</h3>
+                                    </section>
+                                    <section>
+                                        <h3>Rekognition API</h3>
+                                        <img src="aws-kognito.png" style="width: 70%"></img>
+                                    </section>
+                                </section>
+
+                                <section>
+                                    <section>
+                                        <h2>A co vesmír?</h2>
+                                        <img src="https://www.htxt.co.za/wp-content/uploads/2018/11/aws-ground-station-network.jpg" class="fragment"></img>
+                                    </section>
+                                    <section>
+                                        <h2>A když budete zlobit, tak...</h2>
+                                        <img src="http://techgenix.com/tgwordpress/wp-content/uploads/2016/12/image32-e1482537824353.jpg" class="fragment"></img>
+                                    </section>
+                                </section>
+
+                                <section>
+                                    <h2>Díky za pozornost!</h2>
+                                </section>
+                            </div>
+                        </div>
+
+                        <script src="lib/js/head.min.js"></script>
+                        <script src="js/reveal.js"></script>
+
+                        <script>
+                            // More info about config & dependencies:
+                            // - https://github.com/hakimel/reveal.js#configuration
+                            // - https://github.com/hakimel/reveal.js#dependencies
+                            Reveal.initialize({
+                                    dependencies: [
+                                        { src: 'plugin/markdown/marked.js' },
+                                        { src: 'plugin/markdown/markdown.js' },
+                                        { src: 'plugin/notes/notes.js', async: true },
+                                        { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+      ]
+                            });
+                        </script>
+                    </body>
+                </html>
