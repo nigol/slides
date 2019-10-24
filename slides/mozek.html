@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+                <title>Mozek z křemíku</title>
+
+                <link rel="stylesheet" href="css/reveal.css">
+                    <link rel="stylesheet" href="css/theme/black.css">
+
+                        <!-- Theme used for syntax highlighting of code -->
+                        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+                            <!-- Printing and PDF exports -->
+                            <script>
+                                var link = document.createElement( 'link' );
+                                link.rel = 'stylesheet';
+                                link.type = 'text/css';
+                                link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+                                document.getElementsByTagName( 'head' )[0].appendChild( link );
+                            </script>
+                        </head>
+                        <body>
+                            <div class="reveal">
+                                <div class="slides">
+                                    <section>
+                                        <h1>Mozek z křemíku</h1>
+                                        <h3>Jak funguje neuronová síť</h3>
+                                        <p style="font-size: small">
+                                            Martin Polák
+                                        </p>
+                                        <p>
+                                            <a href="https://github.com/nigol/slides">github.com/nigol/slides</a>
+                                        </p>
+                                        <p>
+                                            <a href="http://slides.nigol.cz">slides.nigol.cz</a>
+                                        </p>
+                                    </section>
+
+                                    <section>
+                                        <h2>Máte ho v hlavě</h2>
+                                        <p>
+                                            Mozek. Nejsložitější útvar ve známém vesmíru.
+                                        </p>
+                                        <center>
+                                            <img src="https://wave.rozhlas.cz/sites/default/files/images/00540215.jpeg" style="width: 35%"></img>
+                                        </center>
+                                        <ul>
+                                            <li class="fragment">Asi 100 miliard neuronů</li>
+                                            <li class="fragment">Každý neuron až 10000 synapsí (spojení)</li>
+                                            <li class="fragment">Dohromady je synapsí až 1 trilion (10<sup>15</sup>)</li>
+                                        </ul>
+                                    </section>
+
+                                    <section>
+                                        <h2>Umělý „mozek“</h2>
+                                        <ul>
+                                            <li>1957, Frank Rosenblatt a jeho perceptron</li>
+                                            <li>1960, Bernard Widrow a jeho ADALINE (memistor)</li>
+                                            <li>1969, Marvin Minsky a Seymour Papert, kniha „Perceptrons“ a AI Winter</li>
+                                            <li>80. léta, algoritmus backpropagation</li>
+                                            <li>Po roce 2010, masivní investice a výzkum</li>
+                                        </ul>
+                                    </section>
+
+                                    <section>
+                                        <section>
+                                            <h2>Za vším hledej matematiku</h2>
+                                            <p>
+                                                Potřebujeme model (zjednodušený) fungování reálného systému.
+                                            </p>
+                                        </section>
+                                        <section>
+                                            <h2>Naše úloha</h2>
+                                            <p>Vstup: souřadnice X a Y.</p>
+                                            <p>Výstup: barva bodu (červená nebo modrá).</p>
+                                            <center>
+                                                <img src="lin-sep.png" style="width: 35%"></img>
+                                            </center>
+                                        </section>
+                                        <section>
+                                            <h2>Naše úloha</h2>
+                                            <p>Jednoduchá síť.</p>
+                                            <p>Jeden neuron, 2 vstupy, 1 výstup.</p>
+                                            <center>
+                                                <img src="net1.png" style="width: 35%"></img>
+                                            </center>
+                                        </section>
+                                        <section>
+                                            <h2>Naše úloha</h2>
+                                            <p>Podrobněji...</p>
+                                            <center>
+                                                <img src="net2.png" style="width: 35%"></img>
+                                                <img src="fi.png" style="width: 35%"></img>
+                                            </center>
+                                        </section>
+                                        <section>
+                                            <h2>Naše úloha</h2>
+                                            <p>Řešíme tedy lineární rovnici, musíme najít koeficienty <i>w<sub>1</sub></i>, <i>w<sub>2</sub></i>.</p>
+                                            <ol>
+                                                <li>Zvolíme náhodně <i>w<sub>1</sub></i>, <i>w<sub>2</sub></i>.</li>
+                                                <li>Vložíme trénovací vstup a necháme spočítat výsledek; spočítáme odchylku od očekávaného výsledku, upravíme <i>w<sub>1</sub></i>, <i>w<sub>2</sub></i> a přičteme lokální ke globální odchylce.</li>
+                                                <li>Opakujeme pro všechny položky v trénovací množině.</li>
+                                                <li>Opakujeme, dokud není globální odchylka rovna 0.</li>
+                                            </ol>
+                                        </section>
+                                    </section>
+
+                                    <section>
+                                        <section>
+                                            <h2>To je všechno krásné, ale...</h2>
+                                            <center>
+                                                <img src="lin-sep.png" style="width: 35%"></img>
+                                                vs.
+                                                <img src="non-lin-sep.png" style="width: 35%"></img>
+                                            </center>
+                                        </section>
+                                        <section>
+                                            <h3>Řešení: vícevrstvá síť</h3>
+                                            <h3>Ale...</h3>
+                                            <ul>
+                                                <li>Jak učit síť? (backpropagation)</li>
+                                                <li>Jakou zvolit topologii? (počet skrytých vrstev, atd.)</li>
+                                                <li>...</li>
+                                            </ul>
+                                    </section>
+                                </section>
+
+                                <section>
+                                    <h2>Díky za pozornost!</h2>
+                                </section>
+                            </div>
+                        </div>
+
+                        <script src="lib/js/head.min.js"></script>
+                        <script src="js/reveal.js"></script>
+
+                        <script>
+                            // More info about config & dependencies:
+                            // - https://github.com/hakimel/reveal.js#configuration
+                            // - https://github.com/hakimel/reveal.js#dependencies
+                            Reveal.initialize({
+                                    dependencies: [
+                                        { src: 'plugin/markdown/marked.js' },
+                                        { src: 'plugin/markdown/markdown.js' },
+                                        { src: 'plugin/notes/notes.js', async: true },
+                                        { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+      ]
+                            });
+                        </script>
+                    </body>
+                </html>
