@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+                <title>Bitcoin</title>
+
+                <link rel="stylesheet" href="css/reveal.css">
+                    <link rel="stylesheet" href="css/theme/beige.css">
+
+                        <!-- Theme used for syntax highlighting of code -->
+                        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+                            <!-- Printing and PDF exports -->
+                            <script>
+                                var link = document.createElement( 'link' );
+                                link.rel = 'stylesheet';
+                                link.type = 'text/css';
+                                link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+                                document.getElementsByTagName( 'head' )[0].appendChild( link );
+                            </script>
+                        </head>
+                        <body>
+                            <div class="reveal">
+                                <div class="slides">
+                                    <section>
+                                        <h1>Bitcoin</h1>
+                                        <h3>Decentralizovaná důvěra</h3>
+                                        <img src="https://bitcoin.org/img/icons/logotop.svg?1593468624" style="width: 20%; border: 0px; box-shadow: none"></img>
+                                        <p style="font-size: small">
+                                            Martin Polák
+                                        </p>
+                                        <p>
+                                            <a href="https://github.com/nigol/slides">github.com/nigol/slides</a>
+                                        </p>
+                                        <p>
+                                            <a href="http://slides.nigol.cz">slides.nigol.cz</a>
+                                        </p>
+
+                                </section>
+
+                                <section>
+                                    <section>
+                                        <h2>Stručná historie peněz</h2>
+                                        <p>
+                                            Bez nároku na úplnost :)
+                                        </p>
+                                        <ul>
+                                            <li class="fragment">Směnný obchod</li>
+                                            <li class="fragment">Směnný obchod s prostředníkem (zlato, stříbro,...)</li>
+                                            <li class="fragment">Mince z drahých kovů (pevně daná hodnota)</li>
+                                            <li class="fragment">Bankovky s pevně vázanou hodnotou ($ 1/20 oz. zlata)</li>
+                                            <li class="fragment">Bretonwoodský systém ($ světová rezervní měna)</li>
+                                            <li class="fragment">Systém volných kurzů (fiat měny)</li>
+                                        </ul>
+                                    </section>
+                                    
+                                    <section>
+                                        <h2>Důsledek?</h2>
+                                        <p>
+                                            Hodnota peněz je pod kontrolou autority (centrální banka, vláda).
+                                        </p>
+                                    </section>
+
+                                    <section>
+                                        <h2>Co s tím?</h2>
+                                    </section>
+                                </section>
+
+                            <section>
+                                <h2>Proč potřebujeme autoritu?</h2>
+                                <ul>
+                                    <li class="fragment">Potřebujeme garanta hodnoty / neměnnosti.</li>
+                                    <li class="fragment">Zamezení vícenásobné konzumace.</li>
+                                    <li class="fragment">A další...</li>
+                                </ul>
+                                <p class="fragment">
+                                    <b>Centrální autorita toto řeší, ALE...</b>
+                                </p>
+                                <p class="fragment">
+                                    <b>...POKUD PŘESTANE BÝT GOOD BOY → PROBLÉM!</b>
+                                </p>
+                            </section>
+
+                            <section>
+                                <h2>Decentralizace → blockchain</h2>
+                                <ul>
+                                    <li class="fragment">Sdílená databáze, vše veřejné.</li>
+                                    <li class="fragment">Potvrzování transakcí, asymetrický matematický problém - složité potvrzení, snadné ověření.</li>
+                                    <li class="fragment">Centrální autorita nahrazena kolektivním dohledem.</li>
+                                </ul>
+                        </section>
+
+                        <section>
+                            <section>
+                                <h2>Bitcoin</h2>
+                                <ul>
+                                    <li class="fragment">Virtuální měna založená na technologii blockchainu.</li>
+                                    <li class="fragment">Omezeno maximální množství mincí - 21 milionů, po vytěžení nastane pravděpodobně deflace.</li>
+                                    <li class="fragment">Vytvořeno osobou / osobami pod pseudonymem Satoshi Nakamoto.</li>
+                                    <li class="fragment">Satoshi může vlastnit až 1 milion BTC.</li>
+                                </ul>
+                            </section>
+
+                            <section>
+                                <h2>Bitcoin</h2>
+                                <ul>
+                                    <li class="fragment">Flexibilní, většinu technických parametrů lze měnit.</li>
+                                    <li class="fragment">Momentálně se příliš nepoužívá pro běžné platby.</li>
+                                    <li class="fragment">Vytěženo již asi 88 % všech BTC, poslední bude vytěžen asi v roce 2140.</li>
+                                </ul>
+                            </section>
+                        </section>
+
+                        <section>
+                            <h2>Díky za pozornost!</h2>
+                            <p>
+                                1A5PVCsR7TDBym7GQGxjUibDV1Bz5KTqFK
+                                <img src="qr-btc.png" style="width: 20%; border: 0px; box-shadow: none"></img>
+                            </p>
+                        </section>
+                    </div>
+                </div>
+
+                <script src="lib/js/head.min.js"></script>
+                <script src="js/reveal.js"></script>
+
+                <script>
+                    // More info about config & dependencies:
+                    // - https://github.com/hakimel/reveal.js#configuration
+                    // - https://github.com/hakimel/reveal.js#dependencies
+                    Reveal.initialize({
+                            dependencies: [
+                                { src: 'plugin/markdown/marked.js' },
+                                { src: 'plugin/markdown/markdown.js' },
+                                { src: 'plugin/notes/notes.js', async: true },
+                                { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+      ]
+                    });
+                </script>
+            </body>
+        </html>
